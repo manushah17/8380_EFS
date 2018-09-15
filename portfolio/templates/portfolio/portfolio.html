@@ -1,0 +1,140 @@
+{% extends 'portfolio/base.html' %}
+{% load staticfiles %}
+{% load mathfilters %}
+
+{% block content %}
+<!DOCTYPE html>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+    <meta charset="UTF-8">
+    <title>Eagle Financial Services</title>
+</head>
+<body>
+ <style>
+        body {
+            background-color: beige;
+        }
+    </style>
+
+<div class="container">
+<div class="row">
+
+
+        <table style="width: 80%;">
+             <tr>
+                 <td colspan="2" class="col text-center"><h3 style="padding-left: 15Px">Customer Information</h3></td>
+
+            </tr>
+            <tr>
+                <td><a href="{% url 'portfolio:customer_list' %}" class="row">
+                <span class="btn btn-primary">Back</span></a></td>
+                <td class="col text-right"><a href="" class="row">
+                <span class="btn btn-primary">Generate PDF</span></a></td>
+            </tr>
+        </table>
+
+
+</div>
+ <br/>
+
+<div class="row">
+ 	<table class="table-md table-striped table-bordered table-hover table-condensed table-responsive">
+            <thead>
+            <tr class="bg-info">
+                <th>Customer Number</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Primary Email</th>
+                <th>Cell Phone</th>
+                <th nowrap>Total Acquired Value</th>
+            </tr>
+            </thead>
+             <tbody>
+                <tr>
+                    <td nowrap>{{ customers.cust_number }}</td>
+                    <td nowrap>{{ customers.name }}</td>
+                    <td nowrap>{{ customers.address }}</td>
+                    <td>{{ customers.city }}</td>
+                    <td>{{ customers.state }}</td>
+                    <td>{{ customers.zipcode }}</td>
+                    <td nowrap>{{ customers.email }}</td>
+                    <td nowrap>{{ customers.cell_phone }}</td>
+                    <td nowrap>{{ sum_acquired_value.acquired_value__sum }}</td>
+                 </tr>
+            </tbody>
+        </table>
+</div>
+
+<div class="row">
+        <hr/>
+    <h4 style="padding-left: 15Px">Stocks Information</h4>
+</div>
+<div>
+ 	<table class="table-md table-striped table-bordered table-hover table-condensed table-responsive">
+            <thead>
+            <tr class="bg-info">
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Purchase Price</th>
+                <th>Purchase Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for stock in stocks %}
+                <tr>
+                    <td>{{ stock.symbol }}</td>
+                    <td nowrap>{{ stock.name }}</td>
+                    <td>{{ stock.shares }}</td>
+                    <td nowrap>{{ stock.purchase_price }}</td>
+                    <td nowrap>{{ stock.purchase_date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+
+<div class="row">
+    <hr/>
+    <h4 style="padding-left: 15Px">Investment Information</h4>
+</div>
+<div>
+ 	<table class="table-md table-striped table-bordered table-hover table-condensed table-responsive">
+            <thead>
+            <tr class="bg-info">
+                <th>Category</th>
+                <th>Description</th>
+                <th>Acquired Value</th>
+                <th>Acquired Date</th>
+                <th>Recent Value</th>
+                <th>Recent Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for investment in investments %}
+                <tr>
+                    <td>{{ investment.category }}</td>
+                    <td nowrap>{{ investment.description }}</td>
+                    <td nowrap>{{ investment.acquired_value }}</td>
+                    <td nowrap>{{ investment.acquired_date }}</td>
+                    <td>{{ investment.recent_value }}</td>
+                    <td nowrap>{{ investment.recent_date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+</div>
+</div>
+</body>
+</html>
+{% endblock %}
+
+

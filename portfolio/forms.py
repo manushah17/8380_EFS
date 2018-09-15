@@ -11,8 +11,15 @@ class CustomerForm(forms.ModelForm):
 
 class StockForm(forms.ModelForm):
     class Meta:
-       model = Stock
-       fields = ('customer', 'symbol', 'name', 'shares', 'purchase_price', 'purchase_date',)
+        model = Stock
+        fields = ('customer', 'symbol', 'name', 'shares', 'purchase_price', 'purchase_date',)
+
+
+class InvestmentForm(forms.ModelForm):
+    class Meta:
+        model = Investment
+        fields = ('customer', 'category', 'description', 'acquired_value', 'acquired_date', 'recent_value',
+                 'recent_date',)
 
 
 User = get_user_model()

@@ -45,6 +45,17 @@
                 height: auto;
             }
         }
+        .table-condensed {
+            width: 90% !important;
+            font-size: 14px;
+        }
+        {
+           font-size: 14px;
+           line-height: 1.428;
+        }
+        .table th {
+            width: auto !important;
+        }
     </style>
 </head>
 <body id="app-layout">
@@ -70,8 +81,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="{% url 'portfolio:home' %}">Home</a></li>
                 <li><a href="{% url 'portfolio:customer_list' %}">Customers</a></li>
-               <li><a href="{% url 'portfolio:customer_list' %}">Investments</a></li>
-                <li><a href="{% url 'portfolio:customer_list' %}">Stocks</a></li>
+               <li><a href="{% url 'portfolio:investment_list' %}">Investments</a></li>
+                <li><a href="{% url 'portfolio:stock_list' %}">Stocks</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -86,6 +97,7 @@
                     </li>
                 {% else %}
                     <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-log-in"></span> Register</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -121,7 +133,7 @@
                                 <div class="caption">
                                     <h2>Non-Stock Investments</h2>
                                     <p>Our team also provides advises for Non-Stock investments.</p>
-                                    <p><a class="btn btn-default" href="{% url 'portfolio:customer_list' %}"
+                                    <p><a class="btn btn-default" href="{% url 'portfolio:investment_list' %}"
                                            role="button">View
                                         details &raquo;</a></p>
                                 </div>
@@ -133,7 +145,7 @@
                                 <div class="caption">
                                     <h2>Stock Portfolio</h2>
                                     <p>Our Stock portfolios vary across industries.</p>
-                                    <p><a class="btn btn-default" href="{% url 'portfolio:customer_list' %}" role="button">View
+                                    <p><a class="btn btn-default" href="{% url 'portfolio:stock_list' %}" role="button">View
                                         details &raquo;</a></p>
                                 </div>
                             </div>
