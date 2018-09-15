@@ -33,7 +33,7 @@
             <tr>
                 <td><a href="{% url 'portfolio:customer_list' %}" class="row">
                 <span class="btn btn-primary">Back</span></a></td>
-                <td class="col text-right"><a href="" class="row">
+                <td class="col text-right"><a href="{% url 'portfolio:admin_pdf' pk=customers.pk %}" class="row">
                 <span class="btn btn-primary">Generate PDF</span></a></td>
             </tr>
         </table>

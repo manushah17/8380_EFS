@@ -3,6 +3,9 @@ from .models import *
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
+from django.http import HttpResponse
+from django.template.loader import render_to_string, get_template
+from .utils import render_to_pdf
 
 
 now = timezone.now()
@@ -205,3 +208,25 @@ def logout_view(request):
     logout(request)
     return redirect('portfolio:home')
 
+
+@login_required
+def admin_pdf(request, pk):
+    customer = get_object_or_404(Customer, pk=pk)
+    customers = Customer.objects.get(id=pk)
+    investments = Investment.objects.filter(customer=pk)
+    stocks = Stock.objects.filter(customer=pk)
+    sum_acquired_value = Investment.objects.filter(customer=pk).aggregate(Sum('acquired_value'))
+
+    template = get_template('portfolio/pdf.html')
+    context = {'customers': customers, 'investments': investments,
+                                                      'stocks': stocks,
+                                                      'sum_acquired_value': sum_acquired_value,}
+    html = template.render(context)
+    pdf = render_to_pdf('portfolio/pdf.html', context)
+    if pdf:
+        response =  HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = 'filename= "summary_{}.pdf"'.format(customers.cust_number)
+        #return response
+        #return HttpResponse(pdf, content_type='application/octet-stream')
+        return pdf
+    return HttpResponse("Not Found")

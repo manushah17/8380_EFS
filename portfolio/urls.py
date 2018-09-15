@@ -24,6 +24,8 @@ urlpatterns = [
     path('investment/<int:pk>/edit/', views.investment_edit, name='investment_edit'),
     path('investment/<int:pk>/delete/', views.investment_delete, name='investment_delete'),
 
+    path('customer/<int:pk>/pdf/',  views.admin_pdf, name='admin_pdf'),
+
 
 
 
